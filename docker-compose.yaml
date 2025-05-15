@@ -11,7 +11,7 @@ services:
     volumes:
       - evolution_instances:/evolution/instances
     networks:
-      - evolution-net
+      - mautic-bridge
     env_file:
       - .env
     expose:
@@ -20,7 +20,7 @@ services:
   redis:
     image: redis:latest
     networks:
-      - evolution-net
+      - mautic-bridge
     container_name: redis
     command: >
       redis-server --port 6379 --appendonly yes
@@ -33,7 +33,7 @@ services:
     container_name: postgres
     image: postgres:15
     networks:
-      - evolution-net
+      - mautic-bridge
     command: ["postgres", "-c", "max_connections=1000", "-c", "listen_addresses=*"]
     restart: always
     ports:
@@ -55,6 +55,5 @@ volumes:
 
 
 networks:
-  evolution-net:
-    name: evolution-net
-    driver: bridge
+  mautic-bridge:
+    external: true
