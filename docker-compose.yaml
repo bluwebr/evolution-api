@@ -55,5 +55,5 @@ volumes:
 
 
 networks:
-  mautic-bridge:
+  mautic-docker:
     external: true
